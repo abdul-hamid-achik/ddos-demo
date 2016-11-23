@@ -53,74 +53,61 @@ var server = {
   }
 };
 
-const publicIP = "187.189.155.225";
+var publicIP = "187.189.155.225";
 
 var privateIP = "192.168.10.100";
 
-var request1 = {
-  number: "1",
-  ip: publicIP,
-  type: "login",
-  parameters: {
-    username: "abdulachik@gmail.com",
-    password: "canelitas"
+var requestList = [
+  {
+    ip: publicIP,
+    type: "login",
+    parameters: {
+      username: "abdulachik@gmail.com",
+      password: "canelitas"
+    }
+  },
+  {
+    ip: publicIP,
+    type: "login",
+    parameters: {
+      username: "abdulachik@gmail.com",
+      password: "marcelaplata"
+    }
+  },
+  {
+    ip: publicIP,
+    type: "login",
+    parameters: {}
+  },
+  {
+    ip: publicIP,
+    type: "login",
+    parameters: {
+      username: "abdulhamid@gmail.com",
+      password: "marcelaplata"
+    }
+  },
+  {
+    ip: publicIP,
+    type: null,
+    parameters: null
   }
-}
+];
 
-var request2 = {
-  number: "2",
-  ip: publicIP,
-  type: "login",
-  parameters: {
-    username: "abdulachik@gmail.com",
-    password: "marcelaplata"
-  }
-}
+function sendDDOS () {
+  var counter = 1;
+  while (counter <= requestList.length) {
+    for (requestListIndex in requestList) {
+      // for loop iteration
+      var request = requestList[requestListIndex];
+      request.number = counter;
+      var response = server.processRequest(request);
+      console.log("Request #", counter ," proccesed, the server answered this:\n", response);
+    }
 
-var request3 = {
-  number: "3",
-  ip: publicIP,
-  type: "login",
-  parameters: {
+    counter++;
   }
-}
-var request4 = {
-  number: "4",
-  ip: publicIP,
-  type: "login",
-  parameters: {
-    username: "abdulhamid@gmail.com",
-    password: "marcelaplata"
-  }
-}
-var request5 = {
-  number: "5",
-  ip: publicIP,
-  type: null,
-  parameters: null
 };
 
-
-var response1 = server.processRequest(request1);
-
-var response2 = server.processRequest(request2);
-
-var response3 = server.processRequest(request3);
-
-var response4 = server.processRequest(request4);
-
-var response5 = server.processRequest(request5);
-
-var response6 = server.processRequest();
-
-console.log("Request #", response1.number ," proccesed, the server answered this:\n", response1);
-
-console.log("Request #", response2.number ,"  proccesed, the server answered this:\n", response2);
-
-console.log("Request #", response3.number ,"  proccesed, the server answered this:\n", response3);
-
-console.log("Request #", response4.number ,"  proccesed, the server answered this:\n", response4);
-
-console.log("Request #", response5.number ,"  proccesed, the server answered this:\n", response5);
-
-console.log("Request #", response6.number ,"  proccesed, the server answered this:\n", response6);
+// INVOKE FUNCTION DOG
+sendDDOS();
